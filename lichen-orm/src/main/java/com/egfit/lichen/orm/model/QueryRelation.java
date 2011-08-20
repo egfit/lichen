@@ -44,13 +44,6 @@ public class QueryRelation {
 			return accumulator.append(" and ").append(value.toSql());
 		}
 	}
-	class BeginWhereQlFrame implements QlFrame{
-
-		public String toSql() {
-				return " where 1=1";
-		}
-		
-	}
 	class WhereQlFrame implements QlFrame{
 		private String sql;
 		WhereQlFrame(String sql){
