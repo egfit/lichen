@@ -27,6 +27,8 @@ public class QueryRelation {
 	 * <pre>
 	 * QueryRelation qr = ...
 	 * qr.where("name='jcai'");
+	 * qr.where("name=?","jcai");
+	 * qr.where("name=? or password=?","jcai","mypassword");
 	 * </pre>
 	 * 
 	 * @param ql 查询语句片段
