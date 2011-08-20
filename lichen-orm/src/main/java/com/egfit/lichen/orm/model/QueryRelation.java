@@ -34,7 +34,7 @@ public class QueryRelation {
 	 * @param ql 查询语句片段
 	 * @return 查询对象
 	 */
-	public QueryRelation where(String ... conditions){
+	public QueryRelation where(Object ... conditions){
 		if(conditions.length==0){
 			return this;
 		}
@@ -59,9 +59,9 @@ public class QueryRelation {
 	}
 	class WhereQlFrame implements QlFrame{
 		private String ql;
-		private Flow<String> sqlParameters;
-		WhereQlFrame(String ... conditions){
-			ql = conditions[0];
+		private Flow<Object> sqlParameters;
+		WhereQlFrame(Object ... conditions){
+			ql = conditions[0].toString();
 			sqlParameters=F.flow(conditions);
 		}
 		public String toSql(){
