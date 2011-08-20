@@ -2,8 +2,13 @@ description = "Lichen Framework"
 
 // Remember that after generating a release, this should be incremented. Also don't forget to
 // tag the release in Subversion.
-tapestryVersion = "0.1"
+lichenVersion="0.1"
 
+
+easymockVersion = '3.0'
+
+
+version = System.getProperty('project-version', lichenVersion)
 
 doSign = !project.hasProperty('noSign') && project.hasProperty("signing.keyId")
 
