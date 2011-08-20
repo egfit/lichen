@@ -5,7 +5,7 @@ import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Reducer;
 
 /**
- * ²éÑ¯µÄ·â×°
+ * æŸ¥è¯¢çš„å°è£…
  * @author jcai
  */
 public class QueryRelation {
@@ -16,15 +16,15 @@ public class QueryRelation {
 		this.whereQl= F.flow();
 	}
 	/**
-	 * ¸ø¶¨Ò»¸öqlÆ¬¶Î£¬¼ÓÈëµ½Ìõ¼şÓï¾ä.
+	 * ç»™å®šä¸€ä¸ªqlç‰‡æ®µï¼ŒåŠ å…¥åˆ°æ¡ä»¶è¯­å¥.
 	 * 
-	 * <code>
+	 * <pre>
 	 * QueryRelation qr = ...
 	 * qr.where("name='jcai'");
-	 * </code>
+	 * </pre>
 	 * 
-	 * @param ql ²éÑ¯Óï¾äÆ¬¶Î
-	 * @return ²éÑ¯¶ÔÏó
+	 * @param ql æŸ¥è¯¢è¯­å¥ç‰‡æ®µ
+	 * @return æŸ¥è¯¢å¯¹è±¡
 	 */
 	public QueryRelation where(String ql){
 		whereQl=whereQl.append(new WhereQlFrame(ql));

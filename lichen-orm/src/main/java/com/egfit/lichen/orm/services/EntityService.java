@@ -1,9 +1,9 @@
 package com.egfit.lichen.orm.services;
 
 /**
- * ÊµÌå·şÎñÀà
+ * å®ä½“æœåŠ¡ç±»
  * @author jcai
  */
 public interface EntityService {
-	//----- ²éÑ¯²¿·Ö
+	//----- æŸ¥è¯¢éƒ¨åˆ†
 }

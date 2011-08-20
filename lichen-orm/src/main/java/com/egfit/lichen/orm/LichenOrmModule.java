@@ -1,7 +1,7 @@
 package com.egfit.lichen.orm;
 
 /**
- * Õë¶ÔORMµÄ·â×°Ä£¿é
+ * é’ˆå¯¹ORMçš„å°è£…æ¨¡å—
  * @author jcai
  */
 public class LichenOrmModule {

@@ -116,7 +116,7 @@ subprojects {
     // and meta (sources JARs)
     signing { sign configurations.archives, configurations.meta }
   }
-  [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+  [compileJava, compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
 }
 
 // Specific to top-level build, not set for subprojects:
@@ -141,17 +141,12 @@ task aggregateJavadoc(type: Javadoc, group: "Documentation") {
    maxMemory = '512m'
    destinationDir = javadocBuildDir.dir
    configure(options) {
-       // overview = new File( projectDir, 'src/javadoc/package.html' )
-       stylesheetFile = new File( projectDir, 'src/javadoc/stylesheet.css' )
-       windowTitle = 'Tapestry API Documentation'
-       docTitle = "Tapestry JavaDoc ($project.version)"
-       bottom = "Copyright &copy; 2003-2011 <a href=\"http://tapestry.apache.org\">The Apache Software Foundation</a>."
+       windowTitle = 'Lichen API Documentation'
+       docTitle = "Lichen JavaDoc ($project.version)"
+       bottom = "Copyright &copy; 2011 <a href=\"http://www.egfit.com\">EGF IT Software Department</a>."
        use = true
        links = [ 'http://download.oracle.com/javase/6/docs/api/', 'http://download.oracle.com/javaee/6/api/' ]
-       addStringOption "tagletpath", configurations.javadoc.asPath
-       addStringOption "taglet", "org.apache.tapestry5.javadoc.TapestryDocTaglet"
-       
-       exclude "org/apache/tapestry5/internal/plastic/asm/**"
+       encoding = "utf-8"
    }
 
    subprojects.each { sp -> 
@@ -200,7 +195,7 @@ task zippedSources(type: Zip) {
   group = "Release artifact"
 
   destinationDir = buildDir
-  baseName = "apache-tapestry"
+  baseName = "egf-lichen"
   version = project.version
   classifier = "sources"
 
@@ -217,7 +212,7 @@ task zippedJavadoc(type: Zip, dependsOn: aggregateJavadoc) {
   group = "Release artifact"
   
   destinationDir = buildDir  
-  baseName = "apache-tapestry"
+  baseName = "egf-lichen"
   version = project.version  
   classifier = "javadocs"
   
