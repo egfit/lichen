@@ -47,6 +47,17 @@ public class QueryRelation {
 		whereQl=whereQl.append(new WhereQlFrame(conditions));
 		return this;
 	}
+	/**
+	 * 加入Map作为查询条件
+	 * <pre>
+	 * QueryRelation qr = ...
+	 * Map<String,Object> conditions = new HashMap<String,Object>();
+	 * conditions.put("name","jcai");
+	 * qr.where(conditions);
+	 * </pre>
+	 * @param conditions Map的查询条件
+	 * @return 查询对象
+	 */
 	public QueryRelation where(Map<String,Object> conditions){
 		Iterator<Entry<String, Object>> it = conditions.entrySet().iterator();
 		while(it.hasNext()){
