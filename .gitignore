@@ -1,0 +1,16 @@
+out/
+bin/
+.DS_Store
+.classpath
+.project
+.settings/
+*.ipr
+*.iml
+*.iws
+target
+test-output
+temp-testng*.xml
+build/
+.gradle
+*~
+\#*
