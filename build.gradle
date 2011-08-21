@@ -145,7 +145,7 @@ task aggregateJavadoc(type: Javadoc, group: "Documentation") {
    configure(options) {
        windowTitle = 'Lichen API Documentation'
        docTitle = "Lichen JavaDoc ($project.version)"
-       bottom = "Copyright &copy; 2011 <a href=\"http://lichen.github.com\">the original author or authors.</a>."
+       bottom = "Copyright &copy; 2011 <a href=\"http://jcai.github.com/lichen\">the original author or authors.</a>."
        use = true
        links = [ 'http://download.oracle.com/javase/6/docs/api/', 'http://download.oracle.com/javaee/6/api/' ]
        encoding = "utf-8"
