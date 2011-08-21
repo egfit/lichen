@@ -139,13 +139,13 @@ task aggregateJavadoc(type: Javadoc, group: "Documentation") {
 
    dependsOn configurations.javadoc
    
-   description = "Build the aggregated JavaDocs for all modules"
+   description = "针对所有模块产生javadoc"
    maxMemory = '512m'
    destinationDir = javadocBuildDir.dir
    configure(options) {
        windowTitle = 'Lichen API Documentation'
        docTitle = "Lichen JavaDoc ($project.version)"
-       bottom = "Copyright &copy; 2011 <a href=\"http://www.egfit.com\">EGF IT Software Department</a>."
+       bottom = "Copyright &copy; 2011 <a href=\"http://www.egfit.com\">The EGF IT Software Department</a>."
        use = true
        links = [ 'http://download.oracle.com/javase/6/docs/api/', 'http://download.oracle.com/javaee/6/api/' ]
        encoding = "utf-8"
@@ -185,11 +185,11 @@ task continuousIntegration(dependsOn: [subprojects.build, 'aggregateJavadoc', su
 
 task generateRelease(dependsOn: ['continuousIntegration', subprojects.uploadPublished, 'zippedSources', 'zippedJavadoc'], 
   group: "Release artifact",
-  description: "Generates and uploads a final release to Apache Nexus")
+  description: "生成一个发布版本")
 
 task wrapper(type: Wrapper) {
   gradleVersion = '1.0-milestone-3'
-  description = "Regenerates the Gradle Wrapper files"
+  description = '重新产生Gradle的封装文件'
 }
 
 task zippedSources(type: Zip) {

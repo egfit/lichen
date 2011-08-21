@@ -12,10 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.egfit.lichen.orm.model;
+package com.egfit.lichen.orm.services;
 
 
-import com.egfit.lichen.orm.services.EntityOperations;
 import org.apache.tapestry5.func.F;
 import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Reducer;
@@ -25,7 +24,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * 查询的封装,实现方便快捷的查询
+ *
+ * 查询的封装,实现方便快捷的查询.
+ *
  * <pre>
  *
  * 假设 User和Role实体，user有一个属性roles和Role关联
@@ -35,9 +36,11 @@ import java.util.Map.Entry;
  * 如果未发现，则抛出异常
  * 1.2 User.first
  * 查找第一个，如果未发现，则返回null
+ *
  * 二、多个实体
  * it=User.all
  * while(it.hasNext){}
+ *
  * 三、条件
  * 3.1 纯字符条件
  * User.where("name='jack'")
@@ -52,19 +55,25 @@ import java.util.Map.Entry;
  * User.range("age",12,13)
  * 3.4 子集查询(in)
  * User.in("age",23,24,25,26)
+ *
  * 四、排序
  * User.order("name")
  * User.order("name desc")
  * User.order("name asc")
+ *
  * 五、选取特定字段
  * User.select("name,age")
+ *
  * 六、分页
  * User.limit(5)
  * user.limit(5).offset(10)
+ *
  * 七、分组
  * User.group("age").order("age")
+ *
  * 八、两表联查
  * User.joins("roles","r").where("r.name=?",roleName)
+ *
  * 九、存在
  * User.exists(1)
  * User.where("name=?","jcai").exists()
