@@ -1,13 +1,21 @@
 package com.egfit.lichen.orm.model;
 
 
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.egfit.lichen.orm.services.EntityOperations;
+import com.egfit.lichen.orm.services.EntityService;
 import org.apache.tapestry5.func.F;
 import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Reducer;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateOperations;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * 查询的封装
@@ -19,14 +27,29 @@ public class QueryRelation {
 	private final Reducer<StringBuilder,QlFrame> whereReducer = new WhereQlReducer();
 	private int limit;
 	private int offset;
+	private Class<?> entityClass;
+    private EntityOperations entityOperations;
 
-	public QueryRelation(){
+    public QueryRelation(Class<?> entityClass,EntityOperations entityOperations){
+		this.entityClass = entityClass;
+        this.entityOperations = entityOperations;
 		this.whereQl= F.flow();
 		parameters = F.flow();
+
 	}
 	Flow<Object> parameters(){
 		return parameters;
 	}
+
+    /**
+     * 统计出数量
+     * @return 数量
+     */
+    public int count(){
+        StringBuilder sb = new StringBuilder();
+        this.produceWhereCondition(sb);
+        return entityOperations.count(entityClass,sb.toString(),parameters);
+    }
 	/**
 	 * 给定一个ql片段，加入到条件语句.
 	 * 
@@ -36,8 +59,8 @@ public class QueryRelation {
 	 * qr.where("name=?","jcai");
 	 * qr.where("name=? or password=?","jcai","mypassword");
 	 * </pre>
-	 * 
-	 * @param ql 查询语句片段
+	 *
+	 * @param conditions 查询语句
 	 * @return 查询对象
 	 */
 	public QueryRelation where(Object ... conditions){
@@ -91,7 +114,7 @@ public class QueryRelation {
 			whereQl.reduce(whereReducer, sb);
 		}
 	}
-	interface QlFrame{
+    interface QlFrame{
 		String toSql();
 		Flow<?> parameters();
 	}

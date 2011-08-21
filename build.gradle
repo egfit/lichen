@@ -6,6 +6,8 @@ lichenVersion="0.1"
 
 tapestryVersion = '5.3.0'
 easymockVersion = '3.0'
+hibernateVersion = '3.6.0.Final'
+springVersion = '2.5.6.SEC02'
 
 
 version = System.getProperty('project-version', lichenVersion)
