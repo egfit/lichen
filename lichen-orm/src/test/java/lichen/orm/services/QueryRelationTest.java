@@ -12,16 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.egfit.lichen.orm.services;
+package lichen.orm.services;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.egfit.lichen.orm.entity.UserEntity;
-import com.egfit.lichen.orm.services.EntityOperations;
-import com.egfit.lichen.orm.services.QueryRelation;
+import lichen.orm.entity.UserEntity;
 import org.apache.tapestry5.func.Flow;
 import org.easymock.EasyMock;
 import org.junit.Assert;

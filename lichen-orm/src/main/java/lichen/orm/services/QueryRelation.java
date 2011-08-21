@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.egfit.lichen.orm.services;
+package lichen.orm.services;
 
 
 import org.apache.tapestry5.func.F;

@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.egfit.lichen.orm;
+package lichen.orm.services;
 
 /**
- * 针对ORM的封装模块
+ * 实体服务类
  * @author jcai
  */
-public class LichenOrmModule {
+public interface EntityService {
+	//----- 查询部分
 }
