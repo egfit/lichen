@@ -1,4 +1,4 @@
-# Copyright 2011 The EGF IT Software Department
+# Copyright {YEAR} {ORG}
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +12,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-distributionBase=GRADLE_USER_HOME
-distributionPath=wrapper/dists
-zipStoreBase=GRADLE_USER_HOME
-zipStorePath=wrapper/dists
-distributionUrl=http\://repo.gradle.org/gradle/distributions/gradle-1.0-milestone-3-bin.zip
