@@ -69,7 +69,6 @@ public class QueryRelationTest {
 
         EasyMock.replay(operations);
 
-        StringBuilder sb = new StringBuilder();
         Map<String,Object> conditions = new HashMap<String,Object>();
         conditions.put("name", "jcai");
         Assert.assertEquals(1,qr.where(conditions).count());
