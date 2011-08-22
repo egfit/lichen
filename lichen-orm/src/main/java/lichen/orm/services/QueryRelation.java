@@ -106,10 +106,6 @@ public class QueryRelation {
 
     }
 
-    Flow<Object> parameters() {
-        return parameters;
-    }
-
     /**
      * 统计出数量
      *
@@ -190,6 +186,11 @@ public class QueryRelation {
             sb.append("where 1=1");
             whereQl.reduce(whereReducer, sb);
         }
+    }
+
+    //only for test
+    Flow<Object> parameters() {
+        return parameters;
     }
 
     interface QlFrame {
