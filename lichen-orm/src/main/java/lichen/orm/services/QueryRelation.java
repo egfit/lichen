@@ -111,6 +111,12 @@ public class QueryRelation<T> {
 
     }
     //------- Query Entity
+
+    /**
+     * 查询第一个对象.
+     * 如果未找到则返回空
+     * @return 第一个对象
+     */
     public T first(){
         checkParameterState();
         StringBuilder sb = new StringBuilder();
