@@ -15,6 +15,7 @@
 package lichen.orm.internal;
 
 import lichen.orm.services.EntityOperations;
+
 import org.apache.tapestry5.func.Flow;
 import org.springframework.orm.hibernate3.HibernateOperations;
 

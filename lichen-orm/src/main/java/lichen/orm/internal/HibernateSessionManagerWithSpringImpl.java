@@ -14,25 +14,21 @@
 
 package lichen.orm.internal;
 
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import lichen.orm.LichenSymbols;
 import lichen.orm.services.HibernateConfiger;
 import lichen.orm.services.HibernateSessionManager;
-import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.connection.ConnectionProvider;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
 
 /**
  * 用Spring来管理hibernate的SessionManager

@@ -17,7 +17,6 @@ package lichen.orm.internal;
 import lichen.orm.services.EntityOperations;
 import lichen.orm.services.EntityService;
 import lichen.orm.services.QueryRelation;
-import org.springframework.orm.hibernate3.HibernateOperations;
 
 /**
  * hibernated entity service

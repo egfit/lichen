@@ -14,29 +14,26 @@
 
 package lichen.orm;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
 import lichen.orm.internal.AnnotationEntityPackageConfiger;
 import lichen.orm.internal.HibernateEntityOperationsImpl;
 import lichen.orm.internal.HibernateEntityServiceImpl;
 import lichen.orm.internal.HibernateSessionManagerWithSpringImpl;
-import lichen.orm.services.*;
+import lichen.orm.services.AnnotationEntityPackageManager;
+import lichen.orm.services.EntityOperations;
+import lichen.orm.services.EntityService;
+import lichen.orm.services.HibernateConfiger;
+import lichen.orm.services.HibernateSessionManager;
+
 import org.apache.tapestry5.func.F;
 import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Predicate;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
-import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.Autobuild;
-import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.annotations.Local;
-import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
-import org.apache.tapestry5.ioc.services.RegistryShutdownHub;
-import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
 import org.hibernate.SessionFactory;
-import org.logicalcobwebs.proxool.ProxoolDataSource;
-import org.logicalcobwebs.proxool.ProxoolException;
-import org.logicalcobwebs.proxool.ProxoolFacade;
-import org.logicalcobwebs.proxool.configuration.PropertyConfigurator;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -46,12 +43,6 @@ import org.springframework.orm.hibernate3.HibernateOperations;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Properties;
 
 /**
  * 针对ORM的封装模块

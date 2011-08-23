@@ -16,9 +16,9 @@ package lichen.orm.internal;
 
 import lichen.orm.entity.UserEntity;
 import lichen.orm.services.BaseDbTestCase;
-import lichen.orm.services.EntityOperations;
 import lichen.orm.services.EntityService;
 import lichen.orm.services.QueryRelation;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.orm.hibernate3.HibernateOperations;

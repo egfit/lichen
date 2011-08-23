@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lichen.orm.entity.UserEntity;
+
 import org.apache.tapestry5.func.Flow;
 import org.easymock.EasyMock;
 import org.junit.Assert;
