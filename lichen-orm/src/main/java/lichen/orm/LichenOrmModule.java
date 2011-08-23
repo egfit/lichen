@@ -33,7 +33,19 @@ import lichen.orm.services.HibernateSessionManager;
 import org.apache.tapestry5.func.F;
 import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Predicate;
+import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
+import org.apache.tapestry5.ioc.services.RegistryShutdownHub;
+import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
 import org.hibernate.SessionFactory;
+import org.logicalcobwebs.proxool.ProxoolDataSource;
+import org.logicalcobwebs.proxool.ProxoolException;
+import org.logicalcobwebs.proxool.ProxoolFacade;
+import org.logicalcobwebs.proxool.configuration.PropertyConfigurator;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -112,7 +124,7 @@ public class LichenOrmModule {
         {
             public void registryDidShutdown()
             {
-                Flow flow=F.flow(ProxoolFacade.getAliases()).filter(new Predicate<String>() {
+                Flow<?> flow=F.flow(ProxoolFacade.getAliases()).filter(new Predicate<String>() {
                     public boolean accept(String element) {
                         return element.equals(poolName);
                     }

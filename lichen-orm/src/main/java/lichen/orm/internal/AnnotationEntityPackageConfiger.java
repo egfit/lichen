@@ -19,6 +19,7 @@ import java.util.Collection;
 import lichen.orm.services.AnnotationEntityPackageManager;
 import lichen.orm.services.HibernateConfiger;
 
+import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.hibernate.HibernateException;
 import org.hibernate.cfg.Configuration;
 

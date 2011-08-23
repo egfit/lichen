@@ -21,6 +21,10 @@ import javax.sql.DataSource;
 import lichen.orm.LichenOrmModule;
 import lichen.orm.entity.UserEntity;
 
+import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.Registry;
+import org.apache.tapestry5.ioc.RegistryBuilder;
+import org.apache.tapestry5.ioc.annotations.Startup;
 import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.tool.hbm2ddl.DatabaseMetadata;

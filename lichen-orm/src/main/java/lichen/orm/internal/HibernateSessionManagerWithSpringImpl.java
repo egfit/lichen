@@ -22,6 +22,8 @@ import lichen.orm.LichenSymbols;
 import lichen.orm.services.HibernateConfiger;
 import lichen.orm.services.HibernateSessionManager;
 
+import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
