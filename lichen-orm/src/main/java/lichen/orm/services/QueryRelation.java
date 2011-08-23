@@ -15,7 +15,9 @@
 package lichen.orm.services;
 
 
+import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -98,12 +100,24 @@ public class QueryRelation<T> {
     private Class<T> entityClass;
     private EntityOperations entityOperations;
 
+    //延迟参数是否已经被解压缩
+    private boolean isExtracted = false;
+
     public QueryRelation(Class<T> entityClass, EntityOperations entityOperations) {
         this.entityClass = entityClass;
         this.entityOperations = entityOperations;
         this.whereQl = F.flow();
         parameters = F.flow();
 
+    }
+    //------- Query Entity
+    public T first(){
+        checkParameterState();
+        StringBuilder sb = new StringBuilder();
+        this.limit(1);
+        this.produceWhereCondition(sb);
+        List<T> list = entityOperations.find(entityClass, sb.toString(), parameters,offset,limit);
+        return list.size() == 0 ? null : list.get(0);
     }
 
     /**
@@ -112,6 +126,7 @@ public class QueryRelation<T> {
      * @return 数量
      */
     public int count() {
+        checkParameterState();
         StringBuilder sb = new StringBuilder();
         this.produceWhereCondition(sb);
         return entityOperations.count(entityClass, sb.toString(), parameters);
@@ -131,6 +146,7 @@ public class QueryRelation<T> {
      * @return 查询对象
      */
     public QueryRelation where(Object... conditions) {
+        checkParameterState();
         if (conditions.length == 0) {
             return this;
         }
@@ -151,6 +167,7 @@ public class QueryRelation<T> {
      * @return 查询对象
      */
     public QueryRelation where(Map<String, Object> conditions) {
+        checkParameterState();
         Iterator<Entry<String, Object>> it = conditions.entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, Object> entry = it.next();
@@ -159,6 +176,7 @@ public class QueryRelation<T> {
         return this;
     }
 
+
     /**
      * 限制记录
      *
@@ -166,6 +184,7 @@ public class QueryRelation<T> {
      * @return 查询对象
      */
     public QueryRelation limit(int limit) {
+        checkParameterState();
         this.limit = limit;
         return this;
     }
@@ -177,6 +196,7 @@ public class QueryRelation<T> {
      * @return 查询对象
      */
     public QueryRelation offset(int offset) {
+        checkParameterState();
         this.offset = offset;
         return this;
     }
@@ -185,6 +205,12 @@ public class QueryRelation<T> {
         if (whereQl.count() > 0) {
             sb.append("where 1=1");
             whereQl.reduce(whereReducer, sb);
+        }
+        isExtracted = true;
+    }
+    private void checkParameterState() {
+        if(isExtracted){
+            throw new IllegalStateException("参数已经被使用");
         }
     }
 

@@ -17,7 +17,15 @@ package lichen.orm.internal;
 import lichen.orm.services.EntityOperations;
 
 import org.apache.tapestry5.func.Flow;
+import org.apache.tapestry5.func.Worker;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateOperations;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Hibernate Entity Operations
@@ -34,5 +42,22 @@ public class HibernateEntityOperationsImpl implements EntityOperations{
         return ((Long)hibernateOperations.find(
                 "select count(*) from "+entityClass.getName() +" "+condition,
                 parameters.toArray(Object.class)).get(0)).intValue();
+    }
+
+    public <T> List<T> find(final Class<T> entityClass, final String condition, final Flow<Object> parameters, final int offset, final int limit) {
+        return hibernateOperations.executeFind(new HibernateCallback() {
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+                final Query query = session.createQuery(String.format("from %s %s",entityClass.getName(),condition));
+                parameters.each(new Worker<Object>() {
+                    private int i=0;
+                    public void work(Object value) {
+                        query.setParameter(i++,value);
+                    }
+                });
+                query.setFirstResult(offset);
+                query.setMaxResults(limit);
+                return query.list();
+            }
+        });
     }
 }

@@ -16,6 +16,8 @@ package lichen.orm.services;
 
 import org.apache.tapestry5.func.Flow;
 
+import java.util.List;
+
 /**
  * 实体操作的服务类
  * @author jcai
@@ -29,4 +31,16 @@ public interface EntityOperations {
      * @param parameters 参数
      */
     public int count(Class<?> entityClass, String condition, Flow<Object> parameters);
+
+    /**
+     * 查询实体集合
+     * @param entityClass 实体类
+     * @param condition 查询条件
+     * @param parameters 参数
+     * @param offset 起始位置
+     * @param limit 查询个数
+     * @param <T> 数据类型
+     * @return 查询集合
+     */
+    public <T> List<T> find(Class<T> entityClass, String condition, Flow<Object> parameters, int offset, int limit);
 }

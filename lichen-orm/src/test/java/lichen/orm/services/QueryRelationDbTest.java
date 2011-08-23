@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package lichen.orm.internal;
+package lichen.orm.services;
 
 import lichen.orm.entity.UserEntity;
 import lichen.orm.services.BaseDbTestCase;
@@ -28,7 +28,7 @@ import org.springframework.orm.hibernate3.HibernateOperations;
  * @author jcai
  * @version 0.1
  */
-public class HibernateEntityServiceImplTest extends BaseDbTestCase {
+public class QueryRelationDbTest extends BaseDbTestCase {
 
     @Test
     public void test_count(){
@@ -46,5 +46,14 @@ public class HibernateEntityServiceImplTest extends BaseDbTestCase {
         Assert.assertEquals(0,qr.where("name=? and age>?","jcai",40).count());
         qr = entityService.query(UserEntity.class);
         Assert.assertEquals(1,qr.where("name=?","jcai").where("age>?",20).count());
+    }
+    @Test
+    public void test_first(){
+        EntityService entityService = getService(EntityService.class);
+        HibernateOperations entityOperations = getService(HibernateOperations.class);
+
+        QueryRelation<UserEntity> qr = entityService.query(UserEntity.class);
+        UserEntity user = qr.first();
+        Assert.assertNotNull(user);
     }
 }

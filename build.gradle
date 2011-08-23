@@ -22,6 +22,8 @@ buildscript {
   dependencies {
     classpath "org.gradle.plugins:gradle-signing-plugin:0.0.1-SNAPSHOT"
   }
+  def githubBase = 'https://github.com/valkolovos/gradle_cobertura/raw/master/ivy'
+  apply from: "${githubBase}/gradle_cobertura/gradle_cobertura/1.0-rc4/coberturainit.gradle"
 }
 
 allprojects {
