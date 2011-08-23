@@ -14,6 +14,7 @@
 
 package lichen.orm.services;
 
+import org.hibernate.HibernateException;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -27,5 +28,5 @@ public interface HibernateConfiger {
      * @param configuration hibernate配置接口
      * @see Configuration
      */
-    public void config(Configuration configuration);
+    public void config(Configuration configuration) throws HibernateException;
 }

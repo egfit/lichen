@@ -2,12 +2,14 @@ description = "Lichen Object/Mapping Integration"
 
 
 dependencies {
-  compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion, transitive: false
-  compile "org.hibernate:hibernate-commons-annotations:3.2.0.Final"
-  compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final"
+  compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
+  //, transitive: false
+  //compile "org.hibernate:hibernate-commons-annotations:3.2.0.Final"
+
   compile "org.apache.tapestry:tapestry-func:$tapestryVersion"
   compile "org.apache.tapestry:tapestry-ioc:$tapestryVersion"
   compile "org.springframework:spring:$springVersion"
+  compile "proxool:proxool:0.9.1"
   
   runtime "geronimo-spec:geronimo-spec-jta:1.0-M1"  
   runtime "antlr:antlr:2.7.6"
