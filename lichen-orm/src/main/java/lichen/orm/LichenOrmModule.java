@@ -15,10 +15,10 @@
 package lichen.orm;
 
 import lichen.orm.internal.AnnotationEntityPackageConfiger;
+import lichen.orm.internal.HibernateEntityOperationsImpl;
+import lichen.orm.internal.HibernateEntityServiceImpl;
 import lichen.orm.internal.HibernateSessionManagerWithSpringImpl;
-import lichen.orm.services.AnnotationEntityPackageManager;
-import lichen.orm.services.HibernateConfiger;
-import lichen.orm.services.HibernateSessionManager;
+import lichen.orm.services.*;
 import org.apache.tapestry5.func.F;
 import org.apache.tapestry5.func.Flow;
 import org.apache.tapestry5.func.Predicate;
@@ -60,6 +60,8 @@ import java.util.Properties;
 public class LichenOrmModule {
     public static void bind(ServiceBinder binder){
         binder.bind(HibernateSessionManager.class, HibernateSessionManagerWithSpringImpl.class);
+        binder.bind(EntityService.class, HibernateEntityServiceImpl.class);
+        binder.bind(EntityOperations.class,HibernateEntityOperationsImpl.class);
     }
     public static SessionFactory buildSessionFactory(HibernateSessionManager hibernateSessionManager,PropertyShadowBuilder propertyShadowBuilder){
         return propertyShadowBuilder.build(hibernateSessionManager,"sessionFactory",SessionFactory.class);

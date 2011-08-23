@@ -89,16 +89,16 @@ import java.util.Map.Entry;
  *
  * @author jcai
  */
-public class QueryRelation {
+public class QueryRelation<T> {
     private Flow<QlFrame> whereQl;
     private Flow<Object> parameters;
     private final Reducer<StringBuilder, QlFrame> whereReducer = new WhereQlReducer();
     private int limit;
     private int offset;
-    private Class<?> entityClass;
+    private Class<T> entityClass;
     private EntityOperations entityOperations;
 
-    public QueryRelation(Class<?> entityClass, EntityOperations entityOperations) {
+    public QueryRelation(Class<T> entityClass, EntityOperations entityOperations) {
         this.entityClass = entityClass;
         this.entityOperations = entityOperations;
         this.whereQl = F.flow();

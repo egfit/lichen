@@ -19,5 +19,13 @@ package lichen.orm.services;
  * @author jcai
  */
 public interface EntityService {
-	//----- 查询部分
+    /**
+     * create QueryRelation
+     *
+     * @param clazz entity class
+     * @param <T> entity type parameter
+     * @return QueryRelation Object
+     * @see QueryRelation
+     */
+    public <T> QueryRelation<T> query(Class<T> clazz);
 }

@@ -39,11 +39,6 @@ public class BaseDbTestCase{
     protected <T> T getService(Class<T> serviceInterface){
         return registry.getService(serviceInterface);
     }
-    @Test
-    public void test_load(){
-        HibernateOperations ho = getService(HibernateOperations.class);
-        ho.save(new UserEntity());
-    }
     @After
     public void shutdownContainer(){
        registry.shutdown();
@@ -65,6 +60,9 @@ public class BaseDbTestCase{
                 for(String s:sql)
                     jdbcTemplate.execute(s);
             }catch(Exception e){}
+
+            //init data
+            hibernateOperations.save(new UserEntity());
         }
         public static void contributeAnnotationEntityPackageManager(Configuration<String> configuration){
             configuration.add("lichen.orm.entity");
