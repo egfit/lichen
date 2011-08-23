@@ -26,11 +26,10 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.jdbc.support.lob.LobHandler;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
  * 用Spring来管理hibernate的SessionManager
@@ -40,18 +39,16 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 public class HibernateSessionManagerWithSpringImpl implements HibernateSessionManager,RegistryShutdownListener {
     private SessionFactory sessionFactory;
     private Configuration configuration;
-    private AnnotationSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactoryBean;
 
     public HibernateSessionManagerWithSpringImpl(final List<HibernateConfiger> hibernateConfigurers,
                                                  final DataSource ds,
                                                  final LobHandler lobHandler,
                                                  final @Symbol(LichenSymbols.HIBERNATE_CFG_FILE) String cfgFile){
-        sessionFactoryBean = new AnnotationSessionFactoryBean() {
-            @SuppressWarnings({"deprecation"})
-            protected void postProcessAnnotationConfiguration(AnnotationConfiguration hibernateConfig)
-                    throws HibernateException {
+        sessionFactoryBean = new LocalSessionFactoryBean() {
+        	protected void postProcessConfiguration(Configuration config) throws HibernateException {
                 for(HibernateConfiger configer:hibernateConfigurers){
-                   configer.config(hibernateConfig);
+                   configer.config(config);
                 }
             }
         };
