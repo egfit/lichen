@@ -16,12 +16,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.orm.hibernate3.HibernateOperations;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.config.TxNamespaceHandler;
 import sun.tools.jconsole.Plotter;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -62,7 +66,14 @@ public class BaseDbTestCase{
             }catch(Exception e){}
 
             //init data
-            hibernateOperations.save(new UserEntity());
+            TransactionStatus tx = transaction.getTransaction(null);
+
+            UserEntity userEntity = new UserEntity();
+            userEntity.setName("jcai");
+            userEntity.setAge(30);
+            hibernateOperations.save(userEntity);
+
+            transaction.commit(tx);
         }
         public static void contributeAnnotationEntityPackageManager(Configuration<String> configuration){
             configuration.add("lichen.orm.entity");

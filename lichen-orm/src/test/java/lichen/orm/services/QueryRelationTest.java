@@ -39,11 +39,13 @@ public class QueryRelationTest {
 		assertEquals(0,qr.parameters().count());
 		
 		sb.setLength(0);
-		qr.where("password=?","mypassword");
+		qr.where("password=? and age=?","mypassword",17);
 		qr.produceWhereCondition(sb);
-		assertEquals("where 1=1 and name='jcai' and password=?", sb.toString());
-		assertEquals(1,qr.parameters().count());
+		assertEquals("where 1=1 and name='jcai' and password=? and age=?", sb.toString());
+		assertEquals(2,qr.parameters().count());
 		assertEquals("mypassword",qr.parameters().first());
+        assertEquals(17,qr.parameters().toList().get(1));
+
 	}
 	@Test
 	public void testProduceWhereConditionMap() {
