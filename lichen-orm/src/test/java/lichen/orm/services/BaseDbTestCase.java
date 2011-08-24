@@ -27,7 +27,6 @@ import org.apache.tapestry5.ioc.RegistryBuilder;
 import org.apache.tapestry5.ioc.annotations.Startup;
 import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.tool.hbm2ddl.DatabaseMetadata;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,7 +59,6 @@ public class BaseDbTestCase{
                HibernateOperations hibernateOperations,PlatformTransactionManager transaction) throws SQLException, HibernateException {
             JdbcTemplate jdbcTemplate=new JdbcTemplate(ds);
             Dialect dialect = Dialect.getDialect(sessionManager.getConfiguration().getProperties());
-            DatabaseMetadata metadata= new DatabaseMetadata(jdbcTemplate.getDataSource().getConnection(), dialect);
             String [] sql = sessionManager.getConfiguration().generateDropSchemaScript(dialect);
             try{
                 for(String s:sql)
