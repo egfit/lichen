@@ -34,15 +34,18 @@ public class QueryRelationTest {
 		StringBuilder sb = new StringBuilder();
 		qr.produceWhereCondition(sb);
 		assertEquals("",sb.toString());
+
+        qr = createQueryRelation();
 		qr.where("name='jcai'");
 		qr.produceWhereCondition(sb);
 		assertEquals("where 1=1 and name='jcai'", sb.toString());
 		assertEquals(0,qr.parameters().count());
-		
+
+        qr = createQueryRelation();
 		sb.setLength(0);
 		qr.where("password=? and age=?","mypassword",17);
 		qr.produceWhereCondition(sb);
-		assertEquals("where 1=1 and name='jcai' and password=? and age=?", sb.toString());
+		assertEquals("where 1=1 and password=? and age=?", sb.toString());
 		assertEquals(2,qr.parameters().count());
 		assertEquals("mypassword",qr.parameters().first());
         assertEquals(17,qr.parameters().toList().get(1));
