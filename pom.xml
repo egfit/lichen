@@ -1,0 +1,214 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>lichen</groupId>
+	<artifactId>lichen-project</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1-SNAPSHOT</version>
+	<name>Lichen Project</name>
+	<description>Master project for the modules of lichen Project.</description>
+	<inceptionYear>2011</inceptionYear>
+	<url>http://jcai.github.com/lichen</url>
+	<organization>
+		<name>Lichen Team.</name>
+        <url>http://jcai.github.com/lichen</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>jcai</id>
+			<name>Jun Tsai</name>
+			<email>jcai@fepss.com</email>
+			<url>http://www.ganshane.com</url>
+			<roles>
+				<role>Menace</role>
+			</roles>
+			<timezone>CST</timezone>
+		</developer>
+	</developers>
+	<modules>
+		<module>lichen-orm</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>lichen</groupId>
+				<artifactId>lichen-orm</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.4</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.0</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>2.0-beta-5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<configuration>
+						<descriptorRefs>
+							<descriptorRef>bin</descriptorRef>
+							<descriptorRef>src</descriptorRef>
+						</descriptorRefs>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<executions>
+						<execution>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<optimize>true</optimize>
+						<encoding>utf-8</encoding>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<compress>true</compress>
+							<index>true</index>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<configuration>
+						<!-- Will be true for profile "deploy" -->
+						<updateReleaseInfo>${update-release-info}</updateReleaseInfo>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+    <repositories>
+        <repository>
+            <id>jboss-maven2-release-repository</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>cloudhopper</id>
+            <url>http://maven.cloudhopper.com/repos/third-party/</url>
+        </repository>
+    </repositories>
+	<profiles>
+		<profile>
+			<!--
+				Used only when cuttting a full release. Configures the deploy plugin
+				to mark each artifact as a release (especially important for the
+				archetype). Signs each file deployed (it actually signs way too many
+				files and we have to clean up a bit once deployed).
+			-->
+			<id>deploy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<update-release-info>true</update-release-info>
+				<!--  Don't re-run tests as part of the deploy build. -->
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+		</profile>
+		<!--
+			Only enable Javadoc as part of the output site when the javadoc
+			profile is active.
+		-->
+		<profile>
+			<id>javadoc</id>
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<!--
+							Version 2.3 is broken: See
+							http://jira.codehaus.org/browse/MJAVADOC-145
+						-->
+						<version>2.2</version>
+						<configuration>
+							<linksource>true</linksource>
+							<links>
+                                <link>http://download.oracle.com/javase/6/docs/api/</link>
+                                <link>http://download.oracle.com/javaee/6/api/</link>
+							</links>
+							<aggregate>true</aggregate>
+						</configuration>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+
+	</profiles>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>project-team</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+	<properties>
+		<tapestry-release-version>5.3.0</tapestry-release-version>
+		<hibernate-release-version>3.6.7.Final</hibernate-release-version>
+		<spring-release-version>2.5.6.SEC02</spring-release-version>
+		<cobertura-plugin-version>2.2</cobertura-plugin-version>
+		<update-release-info>false</update-release-info>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+</project>
