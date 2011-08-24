@@ -1,5 +1,5 @@
-<project
-<!-- 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!--
    Copyright 2011 the original author or authors.
 
    Licensed under the Apache License, Version 2.0 (the "License");
