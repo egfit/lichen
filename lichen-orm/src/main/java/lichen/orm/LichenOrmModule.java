@@ -79,8 +79,8 @@ public class LichenOrmModule {
         return new DefaultLobHandler();
     }
     public static void contributeFactoryDefaults(MappedConfiguration<String, Object> configuration){
-        configuration.add(LichenSymbols.HIBERNATE_CFG_FILE,"classpath:/lichen.cfg.hibernate.xml");
-        configuration.add(LichenSymbols.DATABASE_CFG_FILE,"classpath:lichen.cfg.db.properties");
+        configuration.add(LichenOrmSymbols.HIBERNATE_CFG_FILE,"classpath:/lichen.cfg.hibernate.xml");
+        configuration.add(LichenOrmSymbols.DATABASE_CFG_FILE,"classpath:lichen.cfg.db.properties");
     }
     public static AnnotationEntityPackageManager buildAnnotationEntityPackageManager(final Collection<String> packages){
         return new AnnotationEntityPackageManager() {
@@ -95,9 +95,8 @@ public class LichenOrmModule {
     {
         config.addInstance("AnnotationPackageName", AnnotationEntityPackageConfiger.class);
     }
-
-     //构建数据源
-    public static DataSource buildDataSource(@Symbol(LichenSymbols.DATABASE_CFG_FILE) String dbCfgFile,
+    //构建数据源
+    public static DataSource buildDataSource(@Symbol(LichenOrmSymbols.DATABASE_CFG_FILE) String dbCfgFile,
                                              RegistryShutdownHub shutdownHub)
             throws IOException, ProxoolException {
         ResourceLoader resourceLoader = new DefaultResourceLoader();

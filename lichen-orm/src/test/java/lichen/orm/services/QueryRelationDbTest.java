@@ -29,7 +29,7 @@ public class QueryRelationDbTest extends BaseDbTestCase {
     @Test
     public void test_count(){
         EntityService entityService = getService(EntityService.class);
-        QueryRelation qr = entityService.query(UserEntity.class);
+        QueryRelation<UserEntity> qr = entityService.query(UserEntity.class);
         Assert.assertEquals(1,qr.where("id=?",1).count());
         qr = entityService.query(UserEntity.class);
         Assert.assertEquals(1,qr.where("name=?","jcai").count());
@@ -39,6 +39,11 @@ public class QueryRelationDbTest extends BaseDbTestCase {
         Assert.assertEquals(0,qr.where("name=? and age>?","jcai",40).count());
         qr = entityService.query(UserEntity.class);
         Assert.assertEquals(1,qr.where("name=?","jcai").where("age>?",20).count());
+        qr = entityService.query(UserEntity.class);
+        Assert.assertEquals(1,qr.offset(0).count());
+        qr = entityService.query(UserEntity.class);
+        UserEntity userEntity = (UserEntity) qr.offset(10).first();
+        Assert.assertNull(userEntity);
     }
     @Test
     public void test_first(){

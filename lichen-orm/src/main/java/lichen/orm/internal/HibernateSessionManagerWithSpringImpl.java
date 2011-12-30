@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import lichen.orm.LichenSymbols;
+import lichen.orm.LichenOrmSymbols;
 import lichen.orm.services.HibernateConfiger;
 import lichen.orm.services.HibernateSessionManager;
 
@@ -44,7 +44,7 @@ public class HibernateSessionManagerWithSpringImpl implements HibernateSessionMa
     public HibernateSessionManagerWithSpringImpl(final List<HibernateConfiger> hibernateConfigurers,
                                                  final DataSource ds,
                                                  final LobHandler lobHandler,
-                                                 final @Symbol(LichenSymbols.HIBERNATE_CFG_FILE) String cfgFile){
+                                                 final @Symbol(LichenOrmSymbols.HIBERNATE_CFG_FILE) String cfgFile){
         sessionFactoryBean = new LocalSessionFactoryBean() {
         	protected void postProcessConfiguration(Configuration config) throws HibernateException {
                 for(HibernateConfiger configer:hibernateConfigurers){
